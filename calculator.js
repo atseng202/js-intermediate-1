@@ -43,13 +43,25 @@ function calcMonthlyPayment(amount, years, rate) {
 /** Get form values, calculate & update display. */
 
 function getFormValuesAndDisplayResults() {
-  getFormValues();
+  // part 1: getting our form values (we did all the work above)
+  let formValues = getFormValues();
+  let { amount, termInYears, annualRate } = formValues;
+  const monthlyPayment = calcMonthlyPayment(amount, termInYears, annualRate);
+  if (isNaN(monthlyPayment)) {
+    document.getElementById("calc-monthly-payment").innerText = "Fill the out the whole form!";
+    return;
+  }
+
+  // part 2: putting the payment on screen
+  document.getElementById("calc-monthly-payment").innerText = "$" + monthlyPayment;
+
 }
 
 /** Set initial form values and show initial results. Called at app start. */
 
 function setInitialValues() {
   // you can decide on some initial values
+  // pull the html elements and set their initial values to some number like 10000, 5,5
 }
 
 /** Start: set form defaults & display; attach form submit event listener. */
