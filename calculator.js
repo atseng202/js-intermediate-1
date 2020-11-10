@@ -1,3 +1,4 @@
+'use strict';
 // So we only have to do this once, find these elements in DOM
 const calcForm = document.getElementById("calc-form");
 
@@ -8,11 +9,15 @@ const calcForm = document.getElementById("calc-form");
  * */
 
 function getFormValues() {
-  let formData = new FormData(document.getElementById("calc-form"));
-  return formData;
-  
-  
-  // const amount = document.getElementById("loan-amount").innerText;
+  let form = document.getElementById('calc-form');
+  let amount = parseFloat(document.getElementById('loan-amount').value);
+  let termInYears = parseFloat(document.getElementById('loan-years').value);
+  let annualRate = parseFloat(document.getElementById('loan-rate').value);
+  annualRate = annualRate / 100;
+  // console.log(annualRate)
+  // console.log(termInYears)
+  // console.log(amount)
+  return { amount, termInYears, annualRate };
 }
 
 /** Calculate monthly payment and return. */
@@ -38,6 +43,7 @@ function calcMonthlyPayment(amount, years, rate) {
 /** Get form values, calculate & update display. */
 
 function getFormValuesAndDisplayResults() {
+  getFormValues();
 }
 
 /** Set initial form values and show initial results. Called at app start. */
