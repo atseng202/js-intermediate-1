@@ -32,6 +32,10 @@ function getFormValues() {
   returns: the monthly payment (float)
  */
 function calcMonthlyPayment(amount, years, rate) {
+  // fail if we are missing arguments
+  for (let arg of arguments) {
+    if (arg === undefined) return NaN;
+  }
   let i = rate / 12;
   let n = years * 12;
   let numerator = parseFloat(amount * i);
@@ -48,7 +52,7 @@ function getFormValuesAndDisplayResults() {
   let { amount, termInYears, annualRate } = formValues;
   const monthlyPayment = calcMonthlyPayment(amount, termInYears, annualRate);
   if (isNaN(monthlyPayment)) {
-    document.getElementById("calc-monthly-payment").innerText = "Fill the out the whole form!";
+    document.getElementById("calc-monthly-payment").innerText = "Fill out the whole form!";
     return;
   }
 
